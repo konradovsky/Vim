@@ -78,13 +78,13 @@
                             {noremap = true, silent = true})
 
     -- close buffer
-    vim.api.nvim_set_keymap("n", "<leader>c", ":BufferClose<CR>",
+    vim.api.nvim_set_keymap("n", "<leader>w", ":BufferClose<CR>",
                             {noremap = true, silent = true})
 
     -- open projects
-    vim.api.nvim_set_keymap('n', '<leader>p',
-                            ":lua require'telescope'.extensions.project.project{}<CR>",
-                            {noremap = true, silent = true})
+    -- vim.api.nvim_set_keymap('n', '<leader>p',
+    --                         ":lua require'telescope'.extensions.project.project{}<CR>",
+    --                         {noremap = true, silent = true})
 
     vim.api.nvim_set_keymap("n", "<leader>z", ":ZenMode<CR>",
                             {noremap = true, silent = true})
@@ -99,7 +99,7 @@
         ["e"] = "Explorer",
         ["f"] = "Find File",
         ["hl"] = "No Highlight",
-        ["p"] = "Projects",
+        -- ["p"] = "Projects",
         ["z"] = "Zen",
         ["gy"] = "Gitlink",
         [";"] = "Dashboard",
@@ -129,17 +129,17 @@
             }
         },
 
-        d = {
-            name = "Diagnostics",
-            t = {"<cmd>TroubleToggle<cr>", "trouble"},
-            w = {
-                "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "workspace"
-            },
-            d = {"<cmd>TroubleToggle lsp_document_diagnostics<cr>", "document"},
-            q = {"<cmd>TroubleToggle quickfix<cr>", "quickfix"},
-            l = {"<cmd>TroubleToggle loclist<cr>", "loclist"},
-            r = {"<cmd>TroubleToggle lsp_references<cr>", "references"}
-        },
+        -- d = {
+        --     name = "Diagnostics",
+        --     t = {"<cmd>TroubleToggle<cr>", "trouble"},
+        --     w = {
+        --         "<cmd>TroubleToggle lsp_workspace_diagnostics<cr>", "workspace"
+        --     },
+        --     d = {"<cmd>TroubleToggle lsp_document_diagnostics<cr>", "document"},
+        --     q = {"<cmd>TroubleToggle quickfix<cr>", "quickfix"},
+        --     l = {"<cmd>TroubleToggle loclist<cr>", "loclist"},
+        --     r = {"<cmd>TroubleToggle lsp_references<cr>", "references"}
+        -- },
 
         -- " Available Debug Adapters:
         -- "   https://microsoft.github.io/debug-adapter-protocol/implementors/adapters/
@@ -158,99 +158,100 @@
         -- command! DebugStepInto lua require'dap'.step_into()
         -- command! DebugToggleRepl lua require'dap'.repl.toggle()
         -- command! DebugGetSession lua require'dap'.session()
-        D = {
-            name = "Debug",
-            b = {"<cmd>DebugToggleBreakpoint<cr>", "Toggle Breakpoint"},
-            c = {"<cmd>DebugContinue<cr>", "Continue"},
-            i = {"<cmd>DebugStepInto<cr>", "Step Into"},
-            o = {"<cmd>DebugStepOver<cr>", "Step Over"},
-            r = {"<cmd>DebugToggleRepl<cr>", "Toggle Repl"},
-            s = {"<cmd>DebugStart<cr>", "Start"}
-        },
+        -- D = {
+        --     name = "Debug",
+        --     b = {"<cmd>DebugToggleBreakpoint<cr>", "Toggle Breakpoint"},
+        --     c = {"<cmd>DebugContinue<cr>", "Continue"},
+        --     i = {"<cmd>DebugStepInto<cr>", "Step Into"},
+        --     o = {"<cmd>DebugStepOver<cr>", "Step Over"},
+        --     r = {"<cmd>DebugToggleRepl<cr>", "Toggle Repl"},
+        --     s = {"<cmd>DebugStart<cr>", "Start"}
+        -- },
         g = {
             name = "Git",
-            g = {"<cmd>LazyGit<cr>", "LazyGit"},
+            s = {"<cmd>LazyGit<cr>", "LazyGit"},
+
+            r = {"<cmd>lua require 'lv-utils'.reset_hunk()<cr>", "Reset Hunk"},
+            h = {"<cmd>lua require 'lv-utils'.stage_hunk()<cr>", "Stage Hunk"},
             j = {"<cmd>lua require 'lv-utils'.next_hunk()<cr>", "Next Hunk"},
             k = {"<cmd>lua require 'lv-utils'.prev_hunk()<cr>", "Prev Hunk"},
-            l = {"<cmd>lua require 'lv-utils'.blame_line()<cr>", "Blame"},
-            p = {
-                "<cmd>lua require 'lv-utils'.preview_hunk()<cr>", "Preview Hunk"
-            },
-            r = {"<cmd>lua require 'lv-utils'.reset_hunk()<cr>", "Reset Hunk"},
-            R = {
-                "<cmd>lua require 'lv-utils'.reset_buffer()<cr>", "Reset Buffer"
-            },
-            s = {"<cmd>lua require 'lv-utils'.stage_hunk()<cr>", "Stage Hunk"},
             u = {
                 "<cmd>lua require 'lv-utils'.undo_stage_hunk()<cr>",
                 "Undo Stage Hunk"
             },
-            o = {"<cmd>Telescope git_status<cr>", "Open changed file"},
-            b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
-            c = {"<cmd>Telescope git_commits<cr>", "Checkout commit"},
-            C = {
-                "<cmd>Telescope git_bcommits<cr>",
-                "Checkout commit(for current file)"
-            }
+            p = {
+                "<cmd>lua require 'lv-utils'.preview_hunk()<cr>", "Preview Hunk"
+            },
+
+            b = {"<cmd>lua require 'lv-utils'.blame_line()<cr>", "Blame"},
+            -- R = {
+            --     "<cmd>lua require 'lv-utils'.reset_buffer()<cr>", "Reset Buffer"
+            -- },
+            -- o = {"<cmd>Telescope git_status<cr>", "Open changed file"},
+            -- b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
+            -- c = {"<cmd>Telescope git_commits<cr>", "Checkout commit"},
+            -- C = {
+            --     "<cmd>Telescope git_bcommits<cr>",
+            --     "Checkout commit(for current file)"
+            -- }
         },
         l = {
             name = "LSP",
-            a = {"<cmd>Lspsaga code_action<cr>", "Code Action"},
-            A = {"<cmd>Lspsaga range_code_action<cr>", "Selected Action"},
-            d = {
-                "<cmd>Telescope lsp_document_diagnostics<cr>",
-                "Document Diagnostics"
-            },
-            D = {
-                "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-                "Workspace Diagnostics"
-            },
+            -- a = {"<cmd>Lspsaga code_action<cr>", "Code Action"},
+            -- A = {"<cmd>Lspsaga range_code_action<cr>", "Selected Action"},
+            -- d = {
+            --     "<cmd>Telescope lsp_document_diagnostics<cr>",
+            --     "Document Diagnostics"
+            -- },
+            -- D = {
+            --     "<cmd>Telescope lsp_workspace_diagnostics<cr>",
+            --     "Workspace Diagnostics"
+            -- },
             f = {"<cmd>lua require 'lv-utils'.formatting()<cr>", "Format"},
             h = {"<cmd>Lspsaga hover_doc<cr>", "Hover Doc"},
-            i = {"<cmd>LspInfo<cr>", "Info"},
+            -- i = {"<cmd>LspInfo<cr>", "Info"},
             l = {"<cmd>Lspsaga lsp_finder<cr>", "LSP Finder"},
             L = {"<cmd>Lspsaga show_line_diagnostics<cr>", "Line Diagnostics"},
+
             p = {"<cmd>Lspsaga preview_definition<cr>", "Preview Definition"},
-            q = {"<cmd>Telescope quickfix<cr>", "Quickfix"},
+            -- q = {"<cmd>Telescope quickfix<cr>", "Quickfix"},
             r = {"<cmd>Lspsaga rename<cr>", "Rename"},
-            t = {"<cmd>LspTypeDefinition<cr>", "Type Definition"},
-            x = {"<cmd>cclose<cr>", "Close Quickfix"},
-            s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
-            S = {
-                "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
-                "Workspace Symbols"
-            }
+            -- t = {"<cmd>LspTypeDefinition<cr>", "Type Definition"},
+            -- x = {"<cmd>cclose<cr>", "Close Quickfix"},
+            -- s = {"<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols"},
+            -- S = {
+            --     "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+            --     "Workspace Symbols"
+            -- }
         },
-        r = {
-            name = "Replace",
-            f = {
-                "<cmd>lua require('spectre').open_file_search()<cr>",
-                "Current File"
-            },
-            p = {"<cmd>lua require('spectre').open()<cr>", "Project"}
-        },
+        -- r = {
+        --     name = "Replace",
+        --     f = {
+        --         "<cmd>lua require('spectre').open_file_search()<cr>",
+        --         "Current File"
+        --     },
+        --     p = {"<cmd>lua require('spectre').open()<cr>", "Project"}
+        -- },
         s = {
             name = "Search",
-            b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
+            -- b = {"<cmd>Telescope git_branches<cr>", "Checkout branch"},
             c = {"<cmd>Telescope colorscheme<cr>", "Colorscheme"},
-            d = {
-                "<cmd>Telescope lsp_document_diagnostics<cr>",
-                "Document Diagnostics"
-            },
-            D = {
-                "<cmd>Telescope lsp_workspace_diagnostics<cr>",
-                "Workspace Diagnostics"
-            },
+            -- d = {
+            --     "<cmd>Telescope lsp_document_diagnostics<cr>",
+            --     "Document Diagnostics"
+            -- },
+            -- D = {
+            --     "<cmd>Telescope lsp_workspace_diagnostics<cr>",
+            --     "Workspace Diagnostics"
+            -- },
             f = {"<cmd>Telescope find_files<cr>", "Find File"},
-
             -- t = {"<cmd>Telescope live_grep<cr>", "Text"},
             t = {"<cmd>Telescope grep_string search=<cr>", "Text"},
-
-            h = {"<cmd>Telescope help_tags<cr>", "Find Help"},
+            -- h = {"<cmd>Telescope help_tags<cr>", "Find Help"},
             m = {"<cmd>Telescope marks<cr>", "Marks"},
-            M = {"<cmd>Telescope man_pages<cr>", "Man Pages"},
+            -- M = {"<cmd>Telescope man_pages<cr>", "Man Pages"},
             r = {"<cmd>Telescope oldfiles<cr>", "Open Recent File"},
-            R = {"<cmd>Telescope registers<cr>", "Registers"},
+            -- R = {"<cmd>Telescope registers<cr>", "Registers"},
         },
         S = {
             name = "Session",
@@ -266,17 +267,17 @@
         -- }
     }
 
-    if O.extras then
-        mappings["L"] = {
-            name = "+Latex",
-            c = {"<cmd>VimtexCompile<cr>", "Toggle Compilation Mode"},
-            f = {"<cmd>call vimtex#fzf#run()<cr>", "Fzf Find"},
-            i = {"<cmd>VimtexInfo<cr>", "Project Information"},
-            s = {"<cmd>VimtexStop<cr>", "Stop Project Compilation"},
-            t = {"<cmd>VimtexTocToggle<cr>", "Toggle Table Of Content"},
-            v = {"<cmd>VimtexView<cr>", "View PDF"}
-        }
-    end
+    -- if O.extras then
+    --     mappings["L"] = {
+    --         name = "+Latex",
+    --         c = {"<cmd>VimtexCompile<cr>", "Toggle Compilation Mode"},
+    --         f = {"<cmd>call vimtex#fzf#run()<cr>", "Fzf Find"},
+    --         i = {"<cmd>VimtexInfo<cr>", "Project Information"},
+    --         s = {"<cmd>VimtexStop<cr>", "Stop Project Compilation"},
+    --         t = {"<cmd>VimtexTocToggle<cr>", "Toggle Table Of Content"},
+    --         v = {"<cmd>VimtexView<cr>", "View PDF"}
+    --     }
+    -- end
     -- TODO come back and fix visual mappings
     -- local visualOpts = {
     --     mode = "v", -- Visual mode
